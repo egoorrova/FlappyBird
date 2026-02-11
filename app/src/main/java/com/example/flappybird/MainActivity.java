@@ -1,5 +1,6 @@
 package com.example.flappybird;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,12 +27,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        AppConstants.initializatoin(this.getApplicationContext());
+
         playBtn = findViewById(R.id.playBtn);
 
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Play!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Play!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(intent);
             }
         });
 
