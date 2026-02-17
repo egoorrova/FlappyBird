@@ -10,6 +10,9 @@ public class BitmapBank {
 
     Bitmap [] bird;
 
+    Bitmap tubeTop, tubeBottom;
+    Bitmap redTubeTop, redTubeBottom;
+
     public BitmapBank (Resources resources){
 
         background_game = BitmapFactory.decodeResource(resources, R.drawable.background_game);
@@ -20,6 +23,36 @@ public class BitmapBank {
         bird[1] = BitmapFactory.decodeResource(resources, R.drawable.bird_frame2);
         bird[2] = BitmapFactory.decodeResource(resources, R.drawable.bird_frame3);
         bird[3] = BitmapFactory.decodeResource(resources, R.drawable.bird_frame4);
+
+        tubeTop = BitmapFactory.decodeResource(resources, R.drawable.tube_top);
+        tubeBottom = BitmapFactory.decodeResource(resources, R.drawable.tube_bottom);
+
+        redTubeTop = BitmapFactory.decodeResource(resources, R.drawable.red_tube_top);
+        redTubeBottom = BitmapFactory.decodeResource(resources, R.drawable.red_tube_bottom);
+    }
+
+    public Bitmap getRedTubeTop(){
+        return redTubeTop;
+    }
+
+    public Bitmap getRedTubeBottom(){
+        return redTubeBottom;
+    }
+
+    public Bitmap getTubeTop(){
+        return tubeTop;
+    }
+
+    public Bitmap getTubeBottom(){
+        return tubeBottom;
+    }
+
+    public int getTubeWidth(){
+        return  tubeTop.getWidth();
+    }
+
+    public int getTubeHeight(){
+        return tubeTop.getHeight();
     }
 
     public Bitmap getBird(int frame){
