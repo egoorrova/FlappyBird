@@ -22,11 +22,18 @@ public class AppConstants {
 
     static GameEngine gameEngine;
 
+    static SoundBank soundBank;
+
     public static void initializatoin(Context context){
         setScreenSize(context);
         bitmapBank = new BitmapBank(context.getResources());
         setGameConstants();
         gameEngine = new GameEngine();
+        soundBank = new SoundBank(context);
+    }
+
+    public static SoundBank getSoundBank(){
+        return soundBank;
     }
 
     public static void setGameConstants(){

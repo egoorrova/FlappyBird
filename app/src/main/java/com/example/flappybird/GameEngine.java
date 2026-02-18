@@ -62,6 +62,7 @@ public class GameEngine {
                     AppConstants.getBitmapBank().getBirdHeight()))){
                 gameState = 2;
                 Log.d("PLAYER", "HAS LOST");
+                AppConstants.getSoundBank().playHit();
             }
 
             else if (tubes.get(scoringTube).getTubeX() < bird.getX() - AppConstants.getBitmapBank().getTubeWidth()){
@@ -70,6 +71,7 @@ public class GameEngine {
                 if (scoringTube > AppConstants.numberOfTubes - 1){
                     scoringTube = 0;
                 }
+                AppConstants.getSoundBank().playPoint();
             }
             for (int i = 0; i < AppConstants.numberOfTubes; i++){
                 if (tubes.get(i).getTubeX() <- AppConstants.getBitmapBank().getTubeWidth()){
