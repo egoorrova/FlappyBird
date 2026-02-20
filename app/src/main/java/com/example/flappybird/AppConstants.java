@@ -24,6 +24,8 @@ public class AppConstants {
 
     static SoundBank soundBank;
 
+    static Context gameActivityContext;
+
     public static void initializatoin(Context context){
         setScreenSize(context);
         bitmapBank = new BitmapBank(context.getResources());

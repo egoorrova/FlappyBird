@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Flappy Bird</string>
+    <string name="title_activity_game">GameActivity</string>
+
+    <string name="Btn_Exit">Exit</string>
+    <string name="ScoreTXT">Score</string>
+    <string name="Score">0</string>
+    <string name="BestScoreTXT">Best</string>
+    <string name="BestScore">0</string>
+
 </resources>

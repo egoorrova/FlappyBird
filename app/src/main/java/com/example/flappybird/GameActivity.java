@@ -15,6 +15,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppConstants.gameActivityContext = this;
         gameView = new GameView(this);
         setContentView(gameView);
     }
