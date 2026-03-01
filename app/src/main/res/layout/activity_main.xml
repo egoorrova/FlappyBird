@@ -9,6 +9,14 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/spTown"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:background="@drawable/spinner_bg_gray"
+        android:layout_margin="5dp"
+        />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"

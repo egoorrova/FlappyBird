@@ -3,6 +3,7 @@ package com.example.flappybird;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +16,8 @@ public class GameEngine {
 
     BackgroundImage backgroundImage;
 
+    APIRouter router;
+
     Bird bird;
 
     static int gameState;
@@ -22,16 +25,51 @@ public class GameEngine {
     ArrayList<Tube> tubes;
     Random random;
 
+    private boolean isSnowWeather = false;
+    private boolean isDessertWeather = false;
+    private boolean weatherLoaded = false;
+
     int score;
 
     int scoringTube;
 
     Paint scorePaint;
 
-    public GameEngine(){
+    Context context;
+
+    public GameEngine(Context context_, String city){
+
+        context = context_;
 
         backgroundImage = new BackgroundImage();
         bird = new Bird();
+
+        router = new APIRouter();
+        router.getResult(city, context, new APIRouter.WeatherCallback() {
+            @Override
+            public void onSuccess(String temperature) {
+                if (Float.parseFloat(temperature) <= 0.0) {
+                    isSnowWeather = true;
+                    isDessertWeather = false;
+                    Log.d("WethearTemp", "Temp: " + temperature);
+                } else if (Float.parseFloat(temperature) >= 30.0){
+                    isSnowWeather = false;
+                    isDessertWeather = true;
+                }
+                else {
+                    isSnowWeather = false;
+                    isDessertWeather = false;
+                }
+                weatherLoaded = true;
+            }
+
+            @Override
+            public void onError(String error) {
+                isSnowWeather = false;
+                isDessertWeather = false;
+                weatherLoaded = true;
+            }
+        });
 
         //0 - Игра не началась
         //1 - Игра в процессе
@@ -116,19 +154,29 @@ public class GameEngine {
         if (backgroundImage.getX() <- AppConstants.getBitmapBank().getBackgroundWidth()){
             backgroundImage.setX(0);
         }
-        canvas.drawBitmap(AppConstants.getBitmapBank().getBackground_game(), backgroundImage.getX(),
-                backgroundImage.getY(), null);
 
-        if (backgroundImage.getX() <- (AppConstants.getBitmapBank().getBackgroundWidth() - AppConstants.SCREEN_WIDTH)){
-            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground_game(), backgroundImage.getX()+
-                    AppConstants.getBitmapBank().getBackgroundWidth(), backgroundImage.getY(), null);
+        if (!weatherLoaded) {
+            canvas.drawColor(Color.BLACK);
+            return;
         }
+
+        if (isSnowWeather) {
+            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground_game_snow(),
+                    backgroundImage.getX(), backgroundImage.getY(), null);
+        } else if (isDessertWeather){
+            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground_game_dessert(),
+                    backgroundImage.getX(), backgroundImage.getY(), null);
+        }else {
+            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground_game_summer(),
+                    backgroundImage.getX(), backgroundImage.getY(), null);
+        }
+
     }
 
     public void updateAndDrawBird(Canvas canvas){
         if (gameState == 1){
             if (bird.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getBirdHeight())
-                || bird.getVelocity() < 0){
+                    || bird.getVelocity() < 0){
                 bird.setVelocity((bird.getVelocity() + AppConstants.gravity));
                 bird.setY(bird.getY() + bird.getVelocity());
             }

@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 
 public class BitmapBank {
 
-    Bitmap background_game;
+    Bitmap background_game_summer;
+    Bitmap background_game_snow;
+    Bitmap background_game_dessert;
 
     Bitmap [] bird;
 
@@ -15,8 +17,14 @@ public class BitmapBank {
 
     public BitmapBank (Resources resources){
 
-        background_game = BitmapFactory.decodeResource(resources, R.drawable.background_game);
-        background_game = scaleImage(background_game);
+        background_game_summer = BitmapFactory.decodeResource(resources, R.drawable.background_game);
+        background_game_summer = scaleImage(background_game_summer);
+
+        background_game_snow = BitmapFactory.decodeResource(resources, R.drawable.background_snow);
+        background_game_snow = scaleImage(background_game_snow);
+
+        background_game_dessert = BitmapFactory.decodeResource(resources, R.drawable.background_dessert);
+        background_game_dessert = scaleImage(background_game_dessert);
 
         bird = new Bitmap[4];
         bird[0] = BitmapFactory.decodeResource(resources, R.drawable.bird_frame1);
@@ -67,17 +75,27 @@ public class BitmapBank {
         return bird[0].getHeight();
     }
 
-    public Bitmap getBackground_game(){
-        return background_game;
+    public Bitmap getBackground_game_summer(){
+        return background_game_summer;
+    }
+
+    public Bitmap getBackground_game_snow(){
+        return background_game_snow;
+    }
+
+    public Bitmap getBackground_game_dessert(){
+        return background_game_dessert;
     }
 
     public int getBackgroundWidth(){
-        return background_game.getWidth();
+        return background_game_summer.getWidth();
     }
 
     public int getBackgroundHeight(){
-        return background_game.getHeight();
+        return background_game_summer.getHeight();
     }
+
+
 
     public Bitmap scaleImage(Bitmap bitmap){
         float widthHeightRatio = getBackgroundWidth() / getBackgroundHeight();

@@ -16,6 +16,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppConstants.gameActivityContext = this;
+        String city = getIntent().getStringExtra("selected_city");
+
+        AppConstants.initializatoin(getApplicationContext());
+        AppConstants.gameEngine = new GameEngine(this, city);
         gameView = new GameView(this);
         setContentView(gameView);
     }

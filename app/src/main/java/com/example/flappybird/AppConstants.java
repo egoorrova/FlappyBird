@@ -30,7 +30,6 @@ public class AppConstants {
         setScreenSize(context);
         bitmapBank = new BitmapBank(context.getResources());
         setGameConstants();
-        gameEngine = new GameEngine();
         soundBank = new SoundBank(context);
     }
 
